@@ -1,38 +1,48 @@
-# sv
+# svelteflare
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+_an example of how to use a sveltekit app with cloudflare workers, KV, and R2_
 
-## Creating a project
+## running this example
 
-If you're seeing this, you've probably already done this step. Congrats!
+# guide
 
-```bash
-# create a new project in the current directory
-npx sv create
+## stuff you need to install
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- @sveltejs/adapter-cloudflare (switch out adapter auto in svelte.config.js)
+- wrangler
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm add -D @sveltejs/adapter-cloudflare wrangler
 ```
 
-## Building
+## files you need to create
 
-To create a production version of your app:
+- `wrangler.jsonc`
+
+## things you need to create with wrangler
+
+- kv namespace
 
 ```bash
-npm run build
+pnpm dlx wrangler kv namespace create svelteflare-example
 ```
 
-You can preview the production build with `npm run preview`.
+- r2 bucket
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+https://developers.cloudflare.com/r2/get-started/
+
+## scripts to add to your package.json
+
+_see package.json for the scripts i have added_
+
+- `cf-typegen`: generate types for the project
+- `deploy`: deploy the project
+
+## types
+
+- run `pnpm run cf-typegen` to generate types for the project
+- add the types to your project in `src/app.d.ts`, see this project for an example
+
+## work with cloudflare
+
+You can access the cloudflare services you've created with `event.platform.env`. See this project for examples on how to use KV. R2 works the same way, see the docs for [R2](https://developers.cloudflare.com/r2/get-started/).
