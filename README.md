@@ -17,7 +17,7 @@ pnpm add -D @sveltejs/adapter-cloudflare wrangler
 
 ## files you need to create
 
-- `wrangler.jsonc`
+- `wrangler.jsonc` (use the one in this repo as an example)
 
 ## things you need to create with wrangler
 
